@@ -10,6 +10,7 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
+    # Write your nfs server IP
     server: 172.31.30.48
     # Exported path of your NFS server
     path: "/test"
