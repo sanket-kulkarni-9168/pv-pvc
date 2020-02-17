@@ -23,3 +23,29 @@
  2.  mount -t nfs 172.17.0.34:/mnt/sharedfolder /mnt
  3.  df -h
  4.  umount /mnt
+ 
+ 
+ /*FOR  Openshift PV and PVC On Centos using NFS (Openshift playground)*/
+ 1.  yum -y install nfs-utils
+ 2.  mkdir -p /mnt/sharedfolder
+ 3.  chmod 777 /mnt/sharedfolder
+ 4.  cat > /etc/exports
+     /mnt/sharedfolder *(rw,sync,no_root_squash)
+ 5.  exportfs -r
+ 6.  systemctl restart nfs-server 
+ 7.  vim pv.yml 
+ 8.  oc create -f pv.yaml
+ 9.  oc get pv
+ 10. cat pvc.yml 
+ 11. oc create -f pvc.yaml
+ 12. cat pod.yml 
+ 13. oc create -f pod.yaml
+ 14. oc get pods
+ 15. oc exec -it (pod_id) bash
+ 16. ls /mnt/sharedfolder
+
+ /*ON CLIENT SIDE TO TEST NFS SERVER IS WORKING OR NOT*/
+ 1.  yum install nfs-utils
+ 2.  mount -t nfs 172.17.0.34:/mnt/sharedfolder /mnt
+ 3.  df -h
+ 4.  umount /mnt
