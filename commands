@@ -1,4 +1,4 @@
-/*FOR  OPENSHIFT PV and PVC On UBUNTU (katakoda playground for kubernetes)*/
+/*FOR  KUBERNETES PV and PVC On UBUNTU (katakoda playground for kubernetes)*/
  1.  apt install nfs-kernel-server
  2.  mkdir -p /mnt/sharedfolder
  3.  chown nobody:nogroup /mnt/sharedfolder
