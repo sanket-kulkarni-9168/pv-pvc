@@ -1,4 +1,4 @@
-/*FOR  KUBERNETES PV and PVC On UBUNTU (katakoda playground for kubernetes)*/
+/*FOR  KUBERNETES PV and PVC On UBUNTU using NFS (katakoda playground for kubernetes)*/
  1.  apt install nfs-kernel-server
  2.  mkdir -p /mnt/sharedfolder
  3.  chown nobody:nogroup /mnt/sharedfolder
@@ -8,19 +8,18 @@
  6.  exportfs -r
  7.  systemctl restart nfs-kernel-server 
  8.  cat pv.yml 
- 9. kubectl create -f pv.yaml
+ 9.  kubectl create -f pv.yaml
  10. kubectl get pv
  11. cat pvc.yml 
  12. kubectl create -f pvc.yaml
  13. cat pod.yml 
  14. kubectl create -f pod.yaml
- 15. kubectl exec -it wordpress-mysql-d88687df4-vnhsn bash
- 16. ls /mnt/sharedfolder
+ 15. kubectl get pods
+ 16. kubectl exec -it (pod_id) bash
+ 17. ls /mnt/sharedfolder
 
- /*on client*/
+ /*ON CLIENT SIDE TO TEST NFS SERVER IS WORKING OR NOT*/
  1.  apt-get install nfs-common
  2.  mount -t nfs 172.17.0.34:/mnt/sharedfolder /mnt
  3.  df -h
  4.  umount /mnt
-    
-
